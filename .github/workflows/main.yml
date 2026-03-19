@@ -1,19 +1,9 @@
-name: ChatGPT Test
-
-on:
-  workflow_dispatch:
-
-jobs:
-  run-chatgpt:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Call ChatGPT (OpenAI New API)
-        run: |
-          curl -X POST "https://api.openai.com/v1/responses" \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer $LLM_API_KEY" \
-            -d "{
-              \"model\": \"$LLM_MODEL\",
-              \"input\": \"Hello from GitHub Actions!\"
-            }"
+curl -X POST "$LLM_BASE_URL/chat/completions" \
+ -H "Content-Type: application/json" \
+ -H "Authorization: Bearer $LLM_API_KEY" \
+ -d "{
+   \"model\": \"$LLM_MODEL\",
+   \"messages\": [
+     {\"role\": \"user\", \"content\": \"Hello from GitHub Actions!\"}
+   ]
+ }"
