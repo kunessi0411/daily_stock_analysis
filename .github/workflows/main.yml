@@ -1,9 +1,20 @@
-curl -X POST "$LLM_BASE_URL/chat/completions" \
-  -H "content-Type: application/json" \
-  -H "Authorization: Bearer $LLM_API_KEY" \
-  -d "{
-    \"model\": \"$LLM_MODEL\",
-    \"messages\": [
-      {\"role\": \"user\", \"content\": \"Hello from GitHub Actions!\"}
-    ]
-  }"
+name: DeepSeek Test
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-deepseek:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call DeepSeek API
+        run: |
+          curl -X POST "$LLM_BASE_URL/chat/completions" \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer $LLM_API_KEY" \
+            -d "{
+              \"model\": \"$LLM_MODEL\",
+              \"messages\": [
+                {\"role\": \"user\", \"content\": \"Hello from GitHub Actions!\"}
+              ]
+            }"
